@@ -6,3 +6,11 @@
     margin-bottom: 10px;
     text-align: center;
 }
+
+.blog-list {
+    margin-top: 5px;
+    border: 2px double #000 ;
+    padding: 10px;
+    border-radius: 10px;
+
+}
