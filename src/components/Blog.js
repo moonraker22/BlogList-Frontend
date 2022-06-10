@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import blogService from '../services/blogs'
+// import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, setBlogs, blogs }) => {
+const Blog = ({ blog, setBlogs, blogs, blogService }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [showDetails, setShowDetails] = useState(false)
 
@@ -35,14 +35,14 @@ const Blog = ({ blog, setBlogs, blogs }) => {
   return (
     <div className="blog-list">
       <div onClick={() => setShowDetails(!showDetails)}>
-        {blog.title}{' '}
+        {blog.title} <span className="author_list">By: {blog.author}</span>
         <button onClick={() => setShowDetails(!showDetails)}>
           {showDetails ? 'Hide' : 'View'}
         </button>
       </div>
-      <div style={showWhenVisible}>
+      <div className="hidden" style={showWhenVisible}>
         <div>URL: {blog.url}</div>
-        <div>By: {blog.author}</div>
+        <div>Author: {blog.author}</div>
 
         <div>
           {likes} likes <button onClick={handleLike}>like</button>
@@ -57,7 +57,7 @@ const Blog = ({ blog, setBlogs, blogs }) => {
 
 export default Blog
 
-Blog.PropTypes = {
+Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   setBlogs: PropTypes.func.isRequired,
   blogs: PropTypes.array.isRequired,

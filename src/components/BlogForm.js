@@ -1,12 +1,12 @@
-import blogService from '../services/blogs'
+// import blogService from '../services/blogs'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ setBlogs, blogs, setMessage }) => {
+const BlogForm = ({ setBlogs, blogs, setMessage, blogService }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState(() => {
     const user = JSON.parse(localStorage.getItem('user'))
-    return user.username
+    return user?.username || ''
   })
   const [url, setUrl] = useState('')
 
@@ -32,7 +32,7 @@ const BlogForm = ({ setBlogs, blogs, setMessage }) => {
   }
   // console.log('blogs: ', blogs)
   return (
-    <form onSubmit={handleBlogSubmit}>
+    <form onSubmit={handleBlogSubmit} data-testid="blog-form">
       <div>
         <label htmlFor="Title">Title:</label>
         <input
@@ -40,6 +40,7 @@ const BlogForm = ({ setBlogs, blogs, setMessage }) => {
           value={title}
           name="Title"
           onChange={({ target }) => setTitle(target.value)}
+          data-testid="title-input"
         />
       </div>
       <div>
@@ -49,6 +50,7 @@ const BlogForm = ({ setBlogs, blogs, setMessage }) => {
           value={author}
           name="Author"
           onChange={({ target }) => setAuthor(target.value)}
+          data-testid="author-input"
         />
       </div>
       <div>
@@ -58,10 +60,11 @@ const BlogForm = ({ setBlogs, blogs, setMessage }) => {
           value={url}
           name="Url"
           onChange={({ target }) => setUrl(target.value)}
+          data-testid="url-input"
         />
       </div>
 
-      <button type="submit">save</button>
+      <button type="submit">SAVE</button>
     </form>
   )
 }

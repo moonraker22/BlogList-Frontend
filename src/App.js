@@ -34,8 +34,8 @@ const App = () => {
   }, [])
 
   return (
-    <div>
-      <h2>Blogs</h2>
+    <div className="container">
+      <h1>Blogs</h1>
 
       <Notification message={message} setMessage={setMessage} />
 
@@ -65,11 +65,18 @@ const App = () => {
               setBlogs={setBlogs}
               blogs={blogs}
               setMessage={setMessage}
+              blogService={blogService}
             />
           </Togglable>
           <br />
           {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} />
+            <Blog
+              key={blog.id}
+              blog={blog}
+              blogs={blogs}
+              setBlogs={setBlogs}
+              blogService={blogService}
+            />
           ))}
         </>
       )}
