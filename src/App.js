@@ -15,6 +15,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
+  const [type, setType] = useState(null)
 
   const blogFormRef = useRef()
 
@@ -37,7 +38,12 @@ const App = () => {
     <div className="container">
       <h1>Blogs</h1>
 
-      <Notification message={message} setMessage={setMessage} />
+      <Notification
+        message={message}
+        setMessage={setMessage}
+        type={type}
+        setType={setType}
+      />
 
       {user === null ? (
         <>
@@ -49,6 +55,7 @@ const App = () => {
             setUsername={setUsername}
             setPassword={setPassword}
             setMessage={setMessage}
+            setType={setType}
             loginService={loginService}
             blogService={blogService}
             setUser={setUser}
@@ -58,26 +65,35 @@ const App = () => {
         <>
           <hr />
           <p>Welcome {user.name}</p>
-          <LogoutForm setUser={setUser} />
+          <LogoutForm
+            setUser={setUser}
+            setMessage={setMessage}
+            setType={setType}
+          />
           <br />
-          <Togglable buttonLabel="Add New Blog" ref={blogFormRef}>
-            <BlogForm
-              setBlogs={setBlogs}
-              blogs={blogs}
-              setMessage={setMessage}
-              blogService={blogService}
-            />
-          </Togglable>
-          <br />
-          {blogs.map((blog) => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              blogs={blogs}
-              setBlogs={setBlogs}
-              blogService={blogService}
-            />
-          ))}
+          <div className="blogs">
+            <Togglable buttonLabel="Add New Blog" ref={blogFormRef}>
+              <BlogForm
+                setBlogs={setBlogs}
+                blogs={blogs}
+                setMessage={setMessage}
+                setType={setType}
+                blogService={blogService}
+              />
+            </Togglable>
+            <br />
+            {blogs
+              .sort((a, b) => b.likes - a.likes)
+              .map((blog) => (
+                <Blog
+                  key={blog.id}
+                  blog={blog}
+                  blogs={blogs}
+                  setBlogs={setBlogs}
+                  blogService={blogService}
+                />
+              ))}
+          </div>
         </>
       )}
     </div>

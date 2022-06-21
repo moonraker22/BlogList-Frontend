@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useRef, useEffect } from 'react'
 
 const LoginForm = ({
   username,
@@ -6,10 +7,14 @@ const LoginForm = ({
   setUsername,
   password,
   setMessage,
+  setType,
   loginService,
   setUser,
   blogService,
 }) => {
+  const userNameRef = useRef()
+  const passwordRef = useRef()
+
   const handleLogin = async (event) => {
     event.preventDefault()
 
@@ -22,37 +27,47 @@ const LoginForm = ({
       setUser(user)
       window.localStorage.setItem('user', JSON.stringify(user))
       setMessage('Welcome to the application!')
+      setType('success')
       console.log('logged in user: ', user)
       setUsername('')
       setPassword('')
     } catch (exception) {
       setMessage('Wrong Credentials Try Again!')
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
+      setType('error')
     }
   }
+
+  useEffect(() => {
+    userNameRef.current.focus()
+  }, [])
+
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} id="login-form">
       <div>
-        username
+        <label htmlFor="username">Username </label>
         <input
           type="text"
           value={username}
-          name="Username"
+          name="username"
           onChange={({ target }) => setUsername(target.value)}
+          placeholder="username"
+          id="username"
+          ref={userNameRef}
         />
       </div>
       <div>
-        password
+        <label htmlFor="password">Password </label>
         <input
           type="password"
           value={password}
-          name="Password"
+          name="password"
           onChange={({ target }) => setPassword(target.value)}
+          placeholder="password"
+          id="password"
+          ref={passwordRef}
         />
       </div>
-      <button type="submit">login</button>
+      <button type="submit">Login</button>
     </form>
   )
 }

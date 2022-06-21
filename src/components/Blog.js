@@ -33,7 +33,7 @@ const Blog = ({ blog, setBlogs, blogs, blogService }) => {
   }
 
   return (
-    <div className="blog-list">
+    <article className="blog-list">
       <div onClick={() => setShowDetails(!showDetails)}>
         {blog.title} <span className="author_list">By: {blog.author}</span>
         <button onClick={() => setShowDetails(!showDetails)}>
@@ -45,13 +45,16 @@ const Blog = ({ blog, setBlogs, blogs, blogService }) => {
         <div>Author: {blog.author}</div>
 
         <div>
-          {likes} likes <button onClick={handleLike}>like</button>
+          {likes} likes{' '}
+          <button onClick={handleLike} data-testid="like-button">
+            Like
+          </button>
         </div>
         <div>
           <button onClick={handleRemove}>Remove</button>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
 

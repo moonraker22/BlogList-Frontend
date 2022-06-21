@@ -1,8 +1,7 @@
-// import blogService from '../services/blogs'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ setBlogs, blogs, setMessage, blogService }) => {
+const BlogForm = ({ setBlogs, blogs, setMessage, setType, blogService }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState(() => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -25,9 +24,11 @@ const BlogForm = ({ setBlogs, blogs, setMessage, blogService }) => {
       setTitle('')
       setUrl('')
       setMessage('New blog added!')
+      setType('success')
     } catch (exception) {
       console.error('error: ', exception)
       setMessage('Error adding blog!')
+      setType('error')
     }
   }
   // console.log('blogs: ', blogs)
@@ -75,4 +76,6 @@ BlogForm.propTypes = {
   setBlogs: PropTypes.func.isRequired,
   blogs: PropTypes.array.isRequired,
   setMessage: PropTypes.func.isRequired,
+  setType: PropTypes.func.isRequired,
+  blogService: PropTypes.object.isRequired,
 }

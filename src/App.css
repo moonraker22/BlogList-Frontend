@@ -44,12 +44,13 @@ button {
   font-size: 1rem;
   outline: oldlace;
   padding: 0.5rem 1rem;
+  margin: 0.25rem 0.5rem;
 }
 
 button:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   font-size: 1.1rem;
-  transition: all 0.5s;
+  transition: all 0.5s ease-in-out;
 }
 
 .author_list {
@@ -68,14 +69,23 @@ button:hover {
 .notification {
   border: 1px solid #000;
   padding: 10px;
-  background-color: rgb(167, 165, 165);
+  /* background-color: rgb(167, 165, 165); */
   border-radius: 10px;
   margin-bottom: 10px;
   text-align: center;
 }
 
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: #fff;
+}
+
+.success {
+  background-color: rgba(0, 255, 0, 0.5);
+  color: #fff;
+}
+
 .blog-list {
-  margin-top: 5px;
   border: 2px double #fff;
   padding: 10px;
   border-radius: 10px;
@@ -84,4 +94,12 @@ button:hover {
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
     rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.blogs {
+  display: flex;
+  flex-direction: column;
+  color: rgb(216, 207, 207, 0.9);
+  gap: 20px;
+  flex-wrap: wrap;
 }
